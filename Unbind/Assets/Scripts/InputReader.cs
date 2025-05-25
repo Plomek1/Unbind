@@ -11,6 +11,10 @@ namespace Unbind
     {
         public Action<Vector2> PlayerMove;
         public Action<Vector2> PlayerLook;
+        public Action PlayerJump;
+
+        public Action PlayerInteract;
+        public Action PlayerManageTraits;
 
         public Action UISubmit;
         public Action UIOpenDevConsole;
@@ -48,6 +52,10 @@ namespace Unbind
         {
             PlayerMove = null;
             PlayerLook = null;
+            PlayerJump = null;
+
+            PlayerInteract = null;
+            PlayerManageTraits = null;
 
             UISubmit = null;
             UIOpenDevConsole = null;
@@ -66,21 +74,29 @@ namespace Unbind
                 PlayerLook?.Invoke(context.ReadValue<Vector2>());
         }
 
-        public void OnAttack(InputAction.CallbackContext context)
+        public void OnJump(InputAction.CallbackContext context)
         {
+            if (context.performed)
+                PlayerJump?.Invoke();
         }
 
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if (context.performed)
+                PlayerInteract?.Invoke();
+        }
+
+        public void OnManageTraits(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                PlayerManageTraits?.Invoke();
         }
 
         public void OnCrouch(InputAction.CallbackContext context)
         {
         }
 
-        public void OnJump(InputAction.CallbackContext context)
-        {
-        }
+
 
 
         #region User Interface
