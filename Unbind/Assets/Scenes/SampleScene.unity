@@ -257,9 +257,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 214624004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b7849dbd4deed499dbdcaf13d92573, type: 3}
+  m_Script: {fileID: 11500000, guid: 35bf67c915059e64494d52943fdbe07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSelect: 1
+  canManageTraits: 1
   cameraTransform: {fileID: 1784205295}
   interactionRange: 5
 --- !u!114 &214624010
@@ -275,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdingPosition: {fileID: 760371352}
+  cameraPosition: {fileID: 1784205295}
 --- !u!1 &567901832
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +385,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.4, y: 2.67, z: 4.82}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -397,7 +400,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -411,9 +414,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &567901838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,13 +429,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bef59e8406a6954289309f03a552848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
+  OnSelect:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 567901839}
         m_TargetAssemblyTypeName: Unbind.PickupItem, Assembly-CSharp
         m_MethodName: Pickup
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeselect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 567901839}
+        m_TargetAssemblyTypeName: Unbind.PickupItem, Assembly-CSharp
+        m_MethodName: Drop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -462,6 +480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3704d003c05c01b41a258dadf3c788f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followSpeed: 10
+  rotationSpeed: 5
+  maxSpeed: 12
 --- !u!114 &567901840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 760371351}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

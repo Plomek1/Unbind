@@ -5,29 +5,28 @@ namespace Unbind
     public class PickupItemHolder : MonoBehaviour
     {
         [field: SerializeField] public Transform holdingPosition;
+        [field: SerializeField] public Transform cameraPosition;
 
-        private InteractionDetector interactionDetector;
+        private PlayerInteractionTrigger interactionDetector;
         private PickupItem currentItem;
 
         private void Start()
         {
-            interactionDetector = GetComponent<InteractionDetector>();
-            Globals.Instance.inputReader.PlayerInteract += Drop;
+            interactionDetector = GetComponent<PlayerInteractionTrigger>();
         }
 
         public void Pickup(PickupItem item)
         {
             currentItem = item;
-            interactionDetector.enabled = false;
+            interactionDetector.canSelect = false;
         }
 
         public void Drop()
         {
             if (currentItem == null) return;
             
-            currentItem.Drop();
             currentItem = null;
-            interactionDetector.enabled = true;
+            interactionDetector.canSelect = true;
         }
     }
 }

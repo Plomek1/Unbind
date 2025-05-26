@@ -5,30 +5,36 @@ namespace Unbind
 {
     public class Interactable : MonoBehaviour
     {
-        public UnityEvent<Transform> OnInteract;
+        public UnityEvent<Transform> OnSelect;
+        public UnityEvent            OnDeselect;
         public UnityEvent<Transform> OnManageTraits;
         
         public UnityEvent OnFocus;
         public UnityEvent OnDefocus;
 
-        public void Interact(Transform source)
+        public void Select(Transform source)
         {
-            OnInteract?.Invoke(source);
+            OnSelect.Invoke(source);
+        }
+
+        public void Deselect()
+        {
+            OnDeselect.Invoke();
         }
 
         public void ManageTraits(Transform source)
         {
-            OnManageTraits?.Invoke(source);
+            OnManageTraits.Invoke(source);
         }
         
         public void Focus()
         {
-            OnFocus?.Invoke();
+            OnFocus.Invoke();
         }
 
         public void Defocus()
         {
-            OnDefocus?.Invoke();
+            OnDefocus.Invoke();
         }
     }
 }

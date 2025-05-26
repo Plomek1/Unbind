@@ -2,28 +2,40 @@ using UnityEngine;
 
 namespace Unbind
 {
-    public class InteractionDetector : MonoBehaviour
+    public class PlayerInteractionTrigger : MonoBehaviour
     {
+        [HideInInspector] public bool canSelect = true;
+        [HideInInspector] public bool canManageTraits = true;
+
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private float interactionRange;
 
         private Interactable interactableFocused;
+        private Interactable interactableSelected;
 
         private void Start()
         {
-            Globals.Instance.inputReader.PlayerInteract += Interact;
+            Globals.Instance.inputReader.PlayerInteract += Select;
             Globals.Instance.inputReader.PlayerManageTraits += ManageTraits;
         }
 
-        private void Interact()
+        private void Select()
         {
-            if (interactableFocused == null) return;
-            interactableFocused.Interact(transform);
+            if (interactableSelected)
+            {
+                interactableSelected.Deselect();
+                interactableSelected = null;
+                return;
+            }
+
+            if (!canSelect || interactableFocused == null) return;
+            interactableFocused.Select(transform);
+            interactableSelected = interactableFocused;
         }
 
         private void ManageTraits()
         {
-            if (interactableFocused == null) return;
+            if (!canManageTraits || interactableFocused == null) return;
             interactableFocused.ManageTraits(cameraTransform);
         }
 
