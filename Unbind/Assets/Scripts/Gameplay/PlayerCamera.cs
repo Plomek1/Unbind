@@ -11,12 +11,13 @@ namespace Unbind
 
         void Start()
         {
-            Globals.Instance.inputReader.PlayerLook += Look;
-            Cursor.lockState = CursorLockMode.Locked;
+            Globals.Instance.InputReader.PlayerLook += Look;
         }
 
         private void Look(Vector2 mouseDelta)
         {
+            if (!GameManager.cursorLocked) return;
+
             Vector3 cameraRotationDelta = mouseDelta * sensitivity * Time.deltaTime;
             transform.Rotate(Vector3.up * cameraRotationDelta.x);
 

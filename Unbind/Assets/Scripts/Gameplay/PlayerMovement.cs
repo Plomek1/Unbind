@@ -25,21 +25,23 @@ namespace Unbind
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-            Globals.Instance.inputReader.PlayerMove += Move;
-            Globals.Instance.inputReader.PlayerJump += Jump;
+            Globals.Instance.InputReader.PlayerMove += Move;
+            Globals.Instance.InputReader.PlayerJump += Jump;
         }
 
         private void Move(Vector2 movementInput) => movementInputVector = movementInput;
 
         private void Jump()
         {
-            if (!onGround) return;
+            if (!GameManager.cursorLocked || !onGround) return;
             velocityY = Mathf.Sqrt(jumpHeight * 2 * gravity);
         }
 
         private void Update()
         {
-            Vector3 movementVector = transform.right * movementInputVector.x + transform.forward * movementInputVector.y;
+            
+
+            Vector3 movementVector = GameManager.cursorLocked ? transform.right * movementInputVector.x + transform.forward * movementInputVector.y : Vector3.zero;
             movementVector *= movementSpeed * Time.deltaTime;
 
             controller.Move(movementVector);

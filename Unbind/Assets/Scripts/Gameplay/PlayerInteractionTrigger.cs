@@ -15,12 +15,14 @@ namespace Unbind
 
         private void Start()
         {
-            Globals.Instance.inputReader.PlayerInteract += Select;
-            Globals.Instance.inputReader.PlayerManageTraits += ManageTraits;
+            Globals.Instance.InputReader.PlayerInteract += Select;
+            Globals.Instance.InputReader.PlayerManageTraits += ManageTraits;
         }
 
         private void Select()
         {
+            if (!GameManager.cursorLocked) return;
+
             if (interactableSelected)
             {
                 interactableSelected.Deselect();
@@ -35,6 +37,14 @@ namespace Unbind
 
         private void ManageTraits()
         {
+            if (!GameManager.cursorLocked) return;
+
+            if (interactableSelected)
+            {
+                interactableSelected.ManageTraits(transform);
+                return;
+            }
+
             if (!canManageTraits || interactableFocused == null) return;
             interactableFocused.ManageTraits(cameraTransform);
         }

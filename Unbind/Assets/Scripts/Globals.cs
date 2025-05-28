@@ -16,7 +16,8 @@ namespace Unbind
             }
         }
 
-        [Header("Prefabs")]
-        [field: SerializeField] public InputReader inputReader { get; private set; }
+        [field: SerializeField] public InputReader InputReader { get; private set; }
+        [field: SerializeField] public TraitList TraitList { get; private set; }
+
     }
 }

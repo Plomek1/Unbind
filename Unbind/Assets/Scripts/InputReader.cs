@@ -19,7 +19,7 @@ namespace Unbind
         public Action UISubmit;
         public Action UIOpenDevConsole;
 
-        public List<Action> UIBackCallbacks { get; private set; }
+        public List<Action> UICancelCallbacks { get; private set; }
 
         private InputMapping inputActions;
 
@@ -29,6 +29,7 @@ namespace Unbind
             {
                 inputActions = new InputMapping();
                 inputActions.Player.SetCallbacks(this);
+                inputActions.UI.SetCallbacks(this);
                 EnableKeyboard();
             }
             inputActions.Enable();
@@ -59,7 +60,7 @@ namespace Unbind
 
             UISubmit = null;
             UIOpenDevConsole = null;
-            UIBackCallbacks = new List<Action>();
+            UICancelCallbacks = new();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -112,6 +113,8 @@ namespace Unbind
 
         public void OnCancel(InputAction.CallbackContext context)
         {
+            if (context.performed && UICancelCallbacks.Count > 0)
+                UICancelCallbacks[UICancelCallbacks.Count - 1].Invoke();
         }
 
         public void OnPoint(InputAction.CallbackContext context)
@@ -132,12 +135,6 @@ namespace Unbind
 
         public void OnScrollWheel(InputAction.CallbackContext context)
         {
-        }
-
-        public void OnBack(InputAction.CallbackContext context)
-        {
-            if (context.performed && UIBackCallbacks.Count > 0)
-                UIBackCallbacks[UIBackCallbacks.Count - 1].Invoke();
         }
 
         public void OnDevConsole(InputAction.CallbackContext context)

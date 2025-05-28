@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573a3f1c077427b4fa5d367a146dfa9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <inputReader>k__BackingField: {fileID: 11400000, guid: fad521fa4a98eca448e3d7414604099f, type: 2}
+  <InputReader>k__BackingField: {fileID: 11400000, guid: fad521fa4a98eca448e3d7414604099f, type: 2}
+  <TraitList>k__BackingField: {fileID: 11400000, guid: 09f50fa74ab47d04c9980bd992b7091e, type: 2}
