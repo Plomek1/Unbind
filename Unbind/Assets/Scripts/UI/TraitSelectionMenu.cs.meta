@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 6b9f2a9f338265b4d90c4d9095a7258d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - traitSelectionButtonList: {instanceID: 0}
+  - traitSelectionButtonPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

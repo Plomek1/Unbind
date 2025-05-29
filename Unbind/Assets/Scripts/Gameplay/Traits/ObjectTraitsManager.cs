@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Unbind
 {
-    public class ObjectTraits : MonoBehaviour
+    public class ObjectTraitsManager : MonoBehaviour
     {
-        public Action TraitUnbound;
+        public Action<TraitType> TraitUnbound;
 
         [field: SerializeField] public TraitType traits       {  get; private set; }
         [field: SerializeField] public TraitType unboundTrait {  get; private set; }
@@ -20,7 +20,7 @@ namespace Unbind
         {
             if (!traits.HasFlag(type)) return;
             unboundTrait = type == unboundTrait ? TraitType.None : type;
-            TraitUnbound?.Invoke();
+            TraitUnbound?.Invoke(unboundTrait);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Unbind
 
         private PickupItemHolder holder;
         private Transform holderPosition;
+        ObjectTraitsManager traitsManager;
 
         private Rigidbody rb;
         bool isPickedUp;
@@ -19,7 +20,8 @@ namespace Unbind
             rb = GetComponent<Rigidbody>();
             rb.maxLinearVelocity = maxSpeed;
 
-            if (TryGetComponent(out ObjectTraits traits)) traits.TraitUnbound += OnTraitUnbound;
+            traitsManager = GetComponent<ObjectTraitsManager>();
+            traitsManager.TraitUnbound += OnTraitUnbound;
         }
 
         public void Pickup(Transform source)
@@ -30,8 +32,8 @@ namespace Unbind
             holder.Pickup(this);
 
             holderPosition = holder.holdingPosition;
-            rb.useGravity = false;
             isPickedUp = true;
+            rb.useGravity = false;
 
             gameObject.layer = LayerMask.NameToLayer("Default");
         }
@@ -41,8 +43,10 @@ namespace Unbind
             if (!isPickedUp) return;
             
             holderPosition = null;
-            rb.useGravity = true;
             isPickedUp = false;
+
+            if (traitsManager.unboundTrait != TraitType.Gravity)
+                rb.useGravity = true;
 
             holder.Drop();
             holder = null;
@@ -50,11 +54,12 @@ namespace Unbind
             gameObject.layer = LayerMask.NameToLayer("Ground");
         }
 
-        private void OnTraitUnbound()
+        private void OnTraitUnbound(TraitType type)
         {
-            rb.angularVelocity = Vector3.zero;
-            rb.linearVelocity = Vector3.zero;
-            Drop();
+            //rb.angularVelocity = Vector3.zero;
+            //rb.linearVelocity = Vector3.zero;
+            //Debug.Log(rb.linearVelocity);
+            //Drop();
         }
 
         private void FixedUpdate()
