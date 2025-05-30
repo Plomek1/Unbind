@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 898e49da0cda44e4987fb2537d888f6d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - meshRenderer: {instanceID: 0}
+  - outlineShader: {fileID: -6465566751694194690, guid: 923c17fb815cfbb4bb11e2663c6c9c40, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
