@@ -13,8 +13,11 @@ namespace Unbind
         private Interactable interactableFocused;
         private Interactable interactableSelected;
 
+        private CharacterController characterController;
+
         private void Start()
         {
+            characterController = GetComponent<CharacterController>();
             Globals.Instance.InputReader.PlayerInteract += Select;
             Globals.Instance.InputReader.PlayerManageTraits += ManageTraits;
         }
@@ -51,20 +54,22 @@ namespace Unbind
 
         private void Update()
         {
+            //Disabling collision detection so raycast wont return player object
+            characterController.detectCollisions = false;
             Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, interactionRange);
-            if (hitInfo.collider)
+            characterController.detectCollisions = true;
+
+
+            if (interactableFocused && hitInfo.collider?.transform != interactableFocused.transform)
             {
-                if (interactableFocused?.transform != hitInfo.collider.transform &&  hitInfo.collider.TryGetComponent(out Interactable targetInteractable))
-                {
-                    interactableFocused?.Defocus();
-                    targetInteractable.Focus();
-                    interactableFocused = targetInteractable;
-                }
-            }
-            else
-            {
-                interactableFocused?.Defocus();
+                interactableFocused.Defocus();
                 interactableFocused = null;
+            }
+
+            if (hitInfo.collider && hitInfo.collider.TryGetComponent(out Interactable targetInteractable))
+            {
+                interactableFocused = targetInteractable;
+                targetInteractable.Focus();
             }
         }
 

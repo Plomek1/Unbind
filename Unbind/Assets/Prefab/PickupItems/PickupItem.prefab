@@ -1,5 +1,113 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5286648846824168024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8958178340107957560}
+  - component: {fileID: 4780702574117751200}
+  - component: {fileID: 75255290473229093}
+  - component: {fileID: 4162705630966259878}
+  m_Layer: 10
+  m_Name: GFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8958178340107957560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286648846824168024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 45995354501025411}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4780702574117751200
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286648846824168024}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &75255290473229093
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286648846824168024}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4944e2c33c99f9f46a4796e2e746213e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4162705630966259878
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5286648846824168024}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5478465729085389303
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,7 +124,7 @@ GameObject:
   - component: {fileID: 3035258516970234405}
   - component: {fileID: 6731504395188304509}
   - component: {fileID: 7825410641786274594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PickupItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +143,8 @@ Transform:
   m_LocalPosition: {x: 4.7402973, y: 6.014279, z: -0.62752974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8958178340107957560}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &743443689639717979
@@ -57,7 +166,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &289382995075313677
 Rigidbody:
@@ -83,9 +192,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8641382720846205455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +210,7 @@ MonoBehaviour:
   OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2142061252774273663, guid: a2721e6776faf334289af033ecd6898a, type: 3}
+      - m_Target: {fileID: 7886930734865227297}
         m_TargetAssemblyTypeName: Unbind.PickupItem, Assembly-CSharp
         m_MethodName: Pickup
         m_Mode: 0
@@ -116,7 +225,7 @@ MonoBehaviour:
   OnDeselect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2142061252774273663, guid: a2721e6776faf334289af033ecd6898a, type: 3}
+      - m_Target: {fileID: 7886930734865227297}
         m_TargetAssemblyTypeName: Unbind.PickupItem, Assembly-CSharp
         m_MethodName: Drop
         m_Mode: 1
@@ -131,8 +240,8 @@ MonoBehaviour:
   OnManageTraits:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5225583442112346727, guid: a2721e6776faf334289af033ecd6898a, type: 3}
-        m_TargetAssemblyTypeName: Unbind.Traits, Assembly-CSharp
+      - m_Target: {fileID: 3035258516970234405}
+        m_TargetAssemblyTypeName: Unbind.ObjectTraitsManager, Assembly-CSharp
         m_MethodName: OpenTraitsMenu
         m_Mode: 1
         m_Arguments:

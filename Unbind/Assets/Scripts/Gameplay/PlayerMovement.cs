@@ -16,7 +16,7 @@ namespace Unbind
         [Header("Ground Check")]
         [SerializeField] private Transform groundCheck;
         [SerializeField] private float groundCheckSize;
-        [SerializeField] private string groundTag;
+        [SerializeField] private LayerMask groundMask;
 
         private CharacterController controller;
         private Vector3 movementInputVector;
@@ -43,17 +43,9 @@ namespace Unbind
             movementVector *= movementSpeed * Time.deltaTime;
 
             controller.Move(movementVector);
-            inMotion = movementVector.sqrMagnitude > 0;
 
-            foreach (Collider obj in Physics.OverlapSphere(groundCheck.position, groundCheckSize))
-            {
-                if (obj.CompareTag(groundTag))
-                {
-                    onGround = true;
-                    break;
-                }
-                onGround = false;
-            }
+            inMotion = movementVector.sqrMagnitude > 0;
+            onGround = Physics.CheckSphere(groundCheck.position, groundCheckSize, groundMask);
 
             velocityY = onGround && velocityY < 0 ? -5f : velocityY - gravity * Time.deltaTime;
             

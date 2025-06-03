@@ -34,7 +34,7 @@ namespace Unbind
             isPickedUp = true;
             rb.useGravity = false;
 
-            gameObject.tag = "Untagged";
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
         public void Drop()
@@ -50,7 +50,7 @@ namespace Unbind
             holder.Drop();
             holder = null;
 
-            gameObject.tag = "Ground";
+            gameObject.layer = LayerMask.NameToLayer("Ground");
         }
 
         private void FixedUpdate()
