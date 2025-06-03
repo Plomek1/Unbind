@@ -8,7 +8,7 @@ namespace Unbind
         public Action<TraitType> TraitUnbound;
 
         [field: SerializeField] public TraitType traits       {  get; private set; }
-        [field: SerializeField] public TraitType unboundTrait {  get; private set; }
+        public TraitType unboundTrait {  get; private set; }
 
         public void OpenTraitsMenu()
         {

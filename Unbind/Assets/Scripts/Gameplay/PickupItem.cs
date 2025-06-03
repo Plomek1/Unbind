@@ -6,11 +6,11 @@ namespace Unbind
     {
         [SerializeField] private float followSpeed = 15f;
         [SerializeField] private float rotationSpeed = 5f;
-        [SerializeField] private float maxSpeed = 17.5f;
+        [SerializeField] private float maxSpeed = 20f;
 
         private PickupItemHolder holder;
         private Transform holderPosition;
-        ObjectTraitsManager traitsManager;
+        private ObjectTraitsManager traitsManager;
 
         private Rigidbody rb;
         bool isPickedUp;
@@ -21,7 +21,6 @@ namespace Unbind
             rb.maxLinearVelocity = maxSpeed;
 
             traitsManager = GetComponent<ObjectTraitsManager>();
-            traitsManager.TraitUnbound += OnTraitUnbound;
         }
 
         public void Pickup(Transform source)

@@ -34,6 +34,7 @@ namespace Unbind
 
         public void Defocus()
         {
+            Debug.Log("DEGF");
             OnDefocus.Invoke();
         }
     }
