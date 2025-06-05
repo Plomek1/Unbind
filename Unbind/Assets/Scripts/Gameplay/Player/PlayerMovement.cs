@@ -47,6 +47,7 @@ namespace Unbind
             inMotion = movementVector.sqrMagnitude > 0;
             onGround = Physics.CheckSphere(groundCheck.position, groundCheckSize, groundMask);
 
+
             velocityY = onGround && velocityY < 0 ? -5f : velocityY - gravity * Time.deltaTime;
             
             controller.Move(Vector3.up * velocityY * Time.deltaTime);

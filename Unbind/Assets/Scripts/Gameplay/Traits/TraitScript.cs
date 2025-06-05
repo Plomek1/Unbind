@@ -6,29 +6,36 @@ namespace Unbind
     public class TraitScript : MonoBehaviour
     {
         protected TraitType type = TraitType.None;
-        protected bool unbound = false;
+        protected bool active = false;
 
         protected virtual void Init()
         {
             GetComponent<ObjectTraitsManager>().TraitUnbound += OnTraitUnbound;
+            Deactivate();
         }
 
-        protected virtual void UnbindTrait()
+        protected virtual void Activate()
         {
-            unbound = true;
+            active = true;
         }
 
-        protected virtual void BindTrait()
+        protected virtual void Deactivate()
         {
-            unbound = false;
+            active = false;
         }
 
-        private void OnTraitUnbound(TraitType unboundTraitType)
+        protected virtual void ToggleTrait()
         {
-            if (type == unboundTraitType)
-                if (unbound) BindTrait(); else UnbindTrait();
+            if (active)
+                Activate();
             else
-                if (unbound) BindTrait();
+                Deactivate();
+        }
+
+        private void OnTraitUnbound(TraitType currentTraits)
+        {
+            if (currentTraits.HasFlag(type) != active)
+                ToggleTrait();
         }
 
         private void Start() => Init();

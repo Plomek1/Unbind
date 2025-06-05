@@ -7,20 +7,30 @@ namespace Unbind
     {
         public Action<TraitType> TraitUnbound;
 
-        [field: SerializeField] public TraitType traits       {  get; private set; }
-        public TraitType unboundTrait {  get; private set; }
+        public TraitType currentTraits {  get; private set; }
+
+        [SerializeField] public TraitType startTraits;
+
+        private void Start()
+        {
+            currentTraits = startTraits;
+            foreach (TraitType trait in currentTraits.GetFlags())
+                AddTraitScript(trait);
+        }
 
         public void OpenTraitsMenu()
         {
-            TraitSelectionMenu traitSelectionMenu = UIManager.OpenMenu(MenuType.TraitSelectionMenu, traits, unboundTrait) as TraitSelectionMenu;
+            TraitSelectionMenu traitSelectionMenu = UIManager.OpenMenu(MenuType.TraitSelectionMenu, startTraits, currentTraits) as TraitSelectionMenu;
             traitSelectionMenu.TraitSelected += UnbindTrait;
         }
 
-        private void UnbindTrait(TraitType type)
+        private void UnbindTrait(TraitType trait)
         {
-            if (!traits.HasFlag(type)) return;
-            unboundTrait = type == unboundTrait ? TraitType.None : type;
-            TraitUnbound?.Invoke(unboundTrait);
+            //TODO FIX
+            currentTraits = currentTraits.HasFlag(trait) ? currentTraits & ~trait : currentTraits | trait;
+            TraitUnbound?.Invoke(currentTraits);
         }
+
+        private void AddTraitScript(TraitType trait) => Globals.Instance.TraitList.GetTrait(trait).AddTraitComponent(gameObject);
     }
 }

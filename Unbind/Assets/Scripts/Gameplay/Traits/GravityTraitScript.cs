@@ -11,18 +11,19 @@ namespace Unbind
         {
             base.Init();
             type = TraitType.Gravity;
-            rb = GetComponent<Rigidbody>();
+            if (!TryGetComponent(out rb))
+                rb = gameObject.AddComponent<Rigidbody>();
         }
 
-        protected override void UnbindTrait()
+        protected override void Activate()
         {
-            base.UnbindTrait();
+            base.Activate();
             rb.useGravity = false;
         }
 
-        protected override void BindTrait()
+        protected override void Deactivate()
         {
-            base.BindTrait();
+            base.Deactivate();
             rb.useGravity = true;
         }
 

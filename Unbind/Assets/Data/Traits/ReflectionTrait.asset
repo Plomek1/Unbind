@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfcde7d28b7637c49924dc4b16be3c8f, type: 3}
+  m_Script: {fileID: 0}
   m_Name: ReflectionTrait
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp:Unbind:ReflectionTrait
   type: 2
   name: Reflection
   icon: {fileID: 0}

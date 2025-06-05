@@ -44,7 +44,7 @@ namespace Unbind
             holderPosition = null;
             isPickedUp = false;
 
-            if (traitsManager.unboundTrait != TraitType.Gravity)
+            if (traitsManager.currentTraits != TraitType.Gravity)
                 rb.useGravity = true;
 
             holder.Drop();

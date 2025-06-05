@@ -54,6 +54,8 @@ namespace Unbind
 
         private void Update()
         {
+            if (interactableSelected) return;
+
             //Disabling collision detection so raycast wont return player object
             characterController.detectCollisions = false;
             Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo, interactionRange);

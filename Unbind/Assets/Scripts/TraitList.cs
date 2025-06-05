@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Unbind
 {
-    [CreateAssetMenu(fileName = "TraitList", menuName = "Data/TraitList")]
+    [CreateAssetMenu(fileName = "_TraitList", menuName = "Traits/Trait List")]
     public class TraitList : ScriptableObject
     {
         [SerializeField] private Trait[] traits;

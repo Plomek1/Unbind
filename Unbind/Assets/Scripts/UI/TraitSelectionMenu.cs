@@ -17,19 +17,27 @@ namespace Unbind
             UIManager.CloseMenu();
         }
 
-        // 1st param - all traits of an object
-        // 2nd param - currently unbound trait
         public override void Open(params object[] parameters)
         {
+            TraitType startTraits = (TraitType)parameters[0];
+            TraitType traitsToAdd = (TraitType)parameters[1];
+
             base.Open(parameters);
             Time.timeScale = 0f;
 
-            TraitType unboundTrait = (TraitType)parameters[1];
-
-            foreach (TraitType trait in ((TraitType)parameters[0]).GetFlags())
+            //Displaying all default traits
+            foreach (TraitType trait in (startTraits).GetFlags())
             {
                 TraitSelectionButton btn = Instantiate(traitSelectionButtonPrefab, traitSelectionButtonList).GetComponent<TraitSelectionButton>();
-                btn.SetTrait(trait, trait == unboundTrait);
+                btn.SetTrait(trait, traitsToAdd.HasFlag(trait), false);
+                traitsToAdd = traitsToAdd & ~trait;
+            }
+
+            //Displaying all additional traits
+            foreach (TraitType trait in (traitsToAdd).GetFlags())
+            {
+                TraitSelectionButton btn = Instantiate(traitSelectionButtonPrefab, traitSelectionButtonList).GetComponent<TraitSelectionButton>();
+                btn.SetTrait(trait, false, true);
                 btn.TraitSelected += SelectTrait;
             }
 

@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Unbind
 {
@@ -12,14 +13,17 @@ namespace Unbind
 
         private TraitType trait;
 
-        public void SetTrait(TraitType traitType, bool unbound)
+        public void SetTrait(TraitType traitType, bool unbound, bool additional)
         {
             trait = traitType;
             Trait traitData = Globals.Instance.TraitList.GetTrait(traitType);
             
             traitNameLabel.text = traitData.name;
             if (unbound)
-                traitNameLabel.text += " (Currently Unbound)";
+                GetComponent<Button>().enabled = false;
+            if (additional)
+                GetComponent<Image>().color = Color.yellow;
+            
         }
 
         public void SelectTrait()
