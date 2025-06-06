@@ -8,7 +8,7 @@ namespace Unbind
         [SerializeField] private float rotationSpeed = 5f;
         [SerializeField] private float maxSpeed = 20f;
 
-        private PickupItemHolder holder;
+        private PlayerPickupItemHolder holder;
         private Transform holderPosition;
         private ObjectTraitsManager traitsManager;
 
@@ -27,7 +27,7 @@ namespace Unbind
         {
             if (isPickedUp) return;
 
-            holder = source.GetComponent<PickupItemHolder>();
+            holder = source.GetComponent<PlayerPickupItemHolder>();
             holder.Pickup(this);
 
             holderPosition = holder.holdingPosition;
@@ -44,7 +44,7 @@ namespace Unbind
             holderPosition = null;
             isPickedUp = false;
 
-            if (traitsManager.currentTraits != TraitType.Gravity)
+            if (traitsManager.currentTraits.HasFlag(TraitType.Gravity))
                 rb.useGravity = true;
 
             holder.Drop();

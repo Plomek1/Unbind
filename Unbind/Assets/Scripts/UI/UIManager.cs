@@ -6,6 +6,8 @@ namespace Unbind
 {
     public class UIManager : MonoBehaviour
     {
+        public static bool menuOpened => Instance.activeMenu;
+
         private static UIManager Instance;
 
         private Dictionary<MenuType, Menu> menus;

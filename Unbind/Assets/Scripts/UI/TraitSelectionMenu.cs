@@ -20,7 +20,7 @@ namespace Unbind
         public override void Open(params object[] parameters)
         {
             TraitType startTraits = (TraitType)parameters[0];
-            TraitType traitsToAdd = (TraitType)parameters[1];
+            TraitType currentTraits = (TraitType)parameters[1];
 
             base.Open(parameters);
             Time.timeScale = 0f;
@@ -29,15 +29,16 @@ namespace Unbind
             foreach (TraitType trait in (startTraits).GetFlags())
             {
                 TraitSelectionButton btn = Instantiate(traitSelectionButtonPrefab, traitSelectionButtonList).GetComponent<TraitSelectionButton>();
-                btn.SetTrait(trait, traitsToAdd.HasFlag(trait), false);
-                traitsToAdd = traitsToAdd & ~trait;
+                btn.SetTrait(trait, currentTraits.HasFlag(trait), false);
+                currentTraits = currentTraits & ~trait;
+                btn.TraitSelected += SelectTrait;
             }
 
             //Displaying all additional traits
-            foreach (TraitType trait in (traitsToAdd).GetFlags())
+            foreach (TraitType trait in (currentTraits).GetFlags())
             {
                 TraitSelectionButton btn = Instantiate(traitSelectionButtonPrefab, traitSelectionButtonList).GetComponent<TraitSelectionButton>();
-                btn.SetTrait(trait, false, true);
+                btn.SetTrait(trait, true, true);
                 btn.TraitSelected += SelectTrait;
             }
 

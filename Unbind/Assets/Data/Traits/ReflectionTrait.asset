@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f272456cc473f184aad92f99b0167eed, type: 3}
   m_Name: ReflectionTrait
   m_EditorClassIdentifier: Assembly-CSharp:Unbind:ReflectionTrait
   type: 2

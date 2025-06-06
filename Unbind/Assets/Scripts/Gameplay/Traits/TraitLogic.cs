@@ -3,15 +3,15 @@ using UnityEngine;
 namespace Unbind
 {
     [RequireComponent(typeof(ObjectTraitsManager))]
-    public class TraitScript : MonoBehaviour
+    public class TraitLogic : MonoBehaviour
     {
         protected TraitType type = TraitType.None;
         protected bool active = false;
 
-        protected virtual void Init()
+        public virtual void Init(bool activeAtAwake)
         {
-            GetComponent<ObjectTraitsManager>().TraitUnbound += OnTraitUnbound;
-            Deactivate();
+            GetComponent<ObjectTraitsManager>().TraitsUpdated += OnTraitsUpdated;
+            active = activeAtAwake;
         }
 
         protected virtual void Activate()
@@ -27,17 +27,15 @@ namespace Unbind
         protected virtual void ToggleTrait()
         {
             if (active)
-                Activate();
-            else
                 Deactivate();
+            else
+                Activate();
         }
 
-        private void OnTraitUnbound(TraitType currentTraits)
+        private void OnTraitsUpdated(TraitType currentTraits)
         {
             if (currentTraits.HasFlag(type) != active)
                 ToggleTrait();
         }
-
-        private void Start() => Init();
     }
 }

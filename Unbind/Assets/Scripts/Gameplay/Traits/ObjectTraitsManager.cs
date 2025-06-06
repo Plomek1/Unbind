@@ -5,11 +5,11 @@ namespace Unbind
 {
     public class ObjectTraitsManager : MonoBehaviour
     {
-        public Action<TraitType> TraitUnbound;
+        public Action<TraitType> TraitsUpdated;
 
+        [field:SerializeField] 
+        public TraitType startTraits { get; private set; }
         public TraitType currentTraits {  get; private set; }
-
-        [SerializeField] public TraitType startTraits;
 
         private void Start()
         {
@@ -18,19 +18,21 @@ namespace Unbind
                 AddTraitScript(trait);
         }
 
-        public void OpenTraitsMenu()
+        public void AddTrait(TraitType trait)
         {
-            TraitSelectionMenu traitSelectionMenu = UIManager.OpenMenu(MenuType.TraitSelectionMenu, startTraits, currentTraits) as TraitSelectionMenu;
-            traitSelectionMenu.TraitSelected += UnbindTrait;
+            if (currentTraits.HasFlag(trait)) return;
+            AddTraitScript(trait);
+            currentTraits |= trait;
+            TraitsUpdated?.Invoke(currentTraits);
         }
 
-        private void UnbindTrait(TraitType trait)
+        public void RemoveTrait(TraitType trait)
         {
-            //TODO FIX
-            currentTraits = currentTraits.HasFlag(trait) ? currentTraits & ~trait : currentTraits | trait;
-            TraitUnbound?.Invoke(currentTraits);
+            if (!currentTraits.HasFlag(trait)) return;
+            currentTraits &= ~trait;
+            TraitsUpdated?.Invoke(currentTraits);
         }
 
-        private void AddTraitScript(TraitType trait) => Globals.Instance.TraitList.GetTrait(trait).AddTraitComponent(gameObject);
+        private void AddTraitScript(TraitType trait, bool activeAtAwake = true) => Globals.Instance.TraitList.GetTrait(trait).AddTraitComponent(gameObject, activeAtAwake);
     }
 }

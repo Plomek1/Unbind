@@ -4,12 +4,12 @@ namespace Unbind
 {
     public class PlayerInteractionTrigger : MonoBehaviour
     {
+        
         [HideInInspector] public bool canSelect = true;
-        [HideInInspector] public bool canManageTraits = true;
 
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private float interactionRange;
-
+        
         private Interactable interactableFocused;
         private Interactable interactableSelected;
 
@@ -19,8 +19,8 @@ namespace Unbind
         {
             characterController = GetComponent<CharacterController>();
             Globals.Instance.InputReader.PlayerInteract += Select;
-            Globals.Instance.InputReader.PlayerManageTraits += ManageTraits;
         }
+
 
         private void Select()
         {
@@ -33,23 +33,9 @@ namespace Unbind
                 return;
             }
 
-            if (!canSelect || interactableFocused == null) return;
+            if (!canSelect || interactableFocused == null || !interactableFocused.canBeSelected) return;
             interactableFocused.Select(transform);
             interactableSelected = interactableFocused;
-        }
-
-        private void ManageTraits()
-        {
-            if (!GameManager.cursorLocked) return;
-
-            if (interactableSelected)
-            {
-                interactableSelected.ManageTraits(transform);
-                return;
-            }
-
-            if (!canManageTraits || interactableFocused == null) return;
-            interactableFocused.ManageTraits(cameraTransform);
         }
 
         private void Update()
@@ -74,6 +60,8 @@ namespace Unbind
                 targetInteractable.Focus();
             }
         }
+
+        public Interactable GetCurrentInteractable() => interactableSelected ? interactableSelected : interactableFocused;
 
         private void OnDrawGizmosSelected()
         {

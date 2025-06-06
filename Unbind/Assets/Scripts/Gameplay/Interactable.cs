@@ -5,9 +5,11 @@ namespace Unbind
 {
     public class Interactable : MonoBehaviour
     {
+        [field: SerializeField] public bool canBeSelected {  get; private set; }
+        [Space(15)]
+
         public UnityEvent<Transform> OnSelect;
         public UnityEvent            OnDeselect;
-        public UnityEvent<Transform> OnManageTraits;
         
         public UnityEvent OnFocus;
         public UnityEvent OnDefocus;
@@ -22,11 +24,6 @@ namespace Unbind
             OnDeselect.Invoke();
         }
 
-        public void ManageTraits(Transform source)
-        {
-            OnManageTraits.Invoke(source);
-        }
-        
         public void Focus()
         {
             OnFocus.Invoke();
@@ -35,7 +32,6 @@ namespace Unbind
         public void Defocus()
         {
             OnDefocus.Invoke();
-
         }
     }
 }

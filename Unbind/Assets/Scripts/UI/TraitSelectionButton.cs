@@ -13,13 +13,13 @@ namespace Unbind
 
         private TraitType trait;
 
-        public void SetTrait(TraitType traitType, bool unbound, bool additional)
+        public void SetTrait(TraitType traitType, bool active, bool additional)
         {
             trait = traitType;
-            Trait traitData = Globals.Instance.TraitList.GetTrait(traitType);
+            TraitData traitData = Globals.Instance.TraitList.GetTrait(traitType);
             
             traitNameLabel.text = traitData.name;
-            if (unbound)
+            if (!active)
                 GetComponent<Button>().enabled = false;
             if (additional)
                 GetComponent<Image>().color = Color.yellow;

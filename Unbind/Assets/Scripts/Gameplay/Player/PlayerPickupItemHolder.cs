@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Unbind
 {
-    public class PickupItemHolder : MonoBehaviour
+    public class PlayerPickupItemHolder : MonoBehaviour
     {
         [field: SerializeField] public Transform holdingPosition;
         [field: SerializeField] public Transform cameraPosition;
